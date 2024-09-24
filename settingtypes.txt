@@ -1,0 +1,6 @@
+# If enabled, adds several extra types of mushrooms to the game.
+wc_fungi.extrashrooms (Extra Mushroom Types) bool true
+
+# If enabled, giant mushroom caps can be cut into soft bricks 
+# which bond themselves over time under the right conditions.
+wc_fungi.shroombricks (Mushroom Bricks) bool true
