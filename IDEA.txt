@@ -1,18 +1,17 @@
 
-optional mushroom planks/tools
-new optional meshes
 mycelial connection system
-new mushroom growth/spread mechanics
-mushroom shelves from shelf mushrooms
-mycelium is alive and all of the mushrooms growing from it should affect/reflect that, but how to do without metadata?
+
 concrete/bricks - shroomcrete? mycrete? mycotadobe
+
 slime mold :optional:default=false	colony of nodes moving and consuming
+
 megaspores :optional:default=false	giant spores drifting through the air, dont touch! may grow something unexpected
 
-	Panellus Stipticus	Environment:Wood,Soil	Bioluminescent:Green:Bright		Luminous Panellus	Shelf
-	Armillaria Mellea	Environment:Soil		Bioluminescent:Amber:Dim		Honeycap
-	Mycena Chlorophos	Environment:Wood,Soil	Bioluminescent:Green:Bright		Glow Agaric
-	Mycena Luxaeterna	Environment:Soil,Damp	Bioluminescent:Green:Mid		Lichcap
-	Mycena Haematopus	Environment:Stone,Soil	Bioluminescent:Burgundy:Dim		Bleeding Mycena
-	Mycena Interrupta	Environment:Stone,Soil	Bioluminescent:Blue:Mid			Pixie's Parasol
-				
+Bioluminescent:Green:Bright		Luminous Panellus
+Bioluminescent:Burgundy:Dim		Bleeding Mycena
+					
+mycelium needs to slowly degrade and die in stack form unless kept moist (aism)
+mycelium also needs to be able to grow mushrooms on the surface from below grass
+
+
+  

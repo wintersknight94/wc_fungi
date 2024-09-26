@@ -14,8 +14,8 @@ local function shroomgrowth(id, maxlight)
 		label = "Tallshroom growth",
 		nodenames = {modname.. ":mushroom" ..id},
 		neighbors = {"group:mycelium"},
-		interval = 3,	--300
-		chance = 1,		--100
+		interval = 300,	--300
+		chance = 100,		--100
 		action = function(pos)
 		  local above = {x = pos.x, y = pos.y + 1, z = pos.z}
 		  local anode = minetest.get_node(above)
@@ -39,9 +39,9 @@ shroomgrowth("_lux",	4)
 ------------------------------------------------------------------------
 minetest.register_abm({
 	label = "Shroom Growth",
-	nodenames = {groups = {fungal = true}},
---	nodenames = {modname .. ":mycelium"},
-	interval = 1, --120
+--	nodenames = {groups = {fungal = true}},
+	nodenames = {"group:mycelium"},
+	interval = 120, --120
 	chance = 20, --20
 	action = function(pos)
 		local above = {x = pos.x, y = pos.y + 1, z = pos.z}
@@ -70,8 +70,8 @@ minetest.register_abm({
 	label = "Mushroom Growth",
 	nodenames = {"nc_tree:humus"},
 	neighbors = {"group:moist"},
-	interval = 9, --900
-	chance = 1, --100
+	interval = 900, --900
+	chance = 100, --100
 	action = function(pos)
 		local above = {x = pos.x, y = pos.y + 1, z = pos.z}
 --		minetest.chat_send_all("action works")

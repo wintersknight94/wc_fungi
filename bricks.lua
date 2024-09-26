@@ -54,8 +54,8 @@ local function mushroom_bricks(desc, capcolor, stalkcolor, suff, light)
 		label = "Mushroom Brick Bonding",
 		nodenames = {modname .. ":bricks" ..suff},
 		neighbors = {"group:moist", "group:mycelium", "group:shroom_bonded"},
-		interval = 120,
-		chance = 20,
+		interval = 120, --120
+		chance = 20, --20
 		action = function(pos)
 			local light = nodecore.get_node_light(pos)
 			if (not light) or light >= 6 then

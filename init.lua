@@ -17,7 +17,7 @@ include("crafting")
 
 include("growth")
 
---include("spread")
+--include("schematics")
 
 --include("decor")
 
@@ -27,4 +27,4 @@ include("growth")
 
 --include("myconids")
 
---include("conversion")
+include("conversion")

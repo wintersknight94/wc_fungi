@@ -11,7 +11,7 @@ nodecore.register_craft({
 	toolgroups = {crumbly = 2},
 	indexkeys = {"group:mushblock"},
 	nodes = {
-		{match = {groups = {mushblock = true}, replace = "air"},
+		{match = {groups = {mushblock = true}, replace = "air"}},
 		{y = -1, match = "group:dirt", replace = modname.. ":mycelium_1"},
 	}
 })
@@ -28,4 +28,6 @@ nodecore.register_craft({
 		}
 	}
 })
+------------------------------------------------------------------------
+
 ------------------------------------------------------------------------
