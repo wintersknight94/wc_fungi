@@ -13,7 +13,9 @@ if minetest.settings:get_bool(modname .. ".mushroom_bricks", true) then
 	include("bricks")
 end
 
---include("growth")
+include("crafting")
+
+include("growth")
 
 --include("spread")
 

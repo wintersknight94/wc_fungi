@@ -5,11 +5,10 @@ local math_random
     = math.random
 -- LUALOCALS > ---------------------------------------------------------
 local modname = minetest.get_current_modname()
-
+------------------------------------------------------------------------
 local dirt = "nc_terrain_dirt.png"
 local humus = "nc_tree_humus.png"
 local hyphae = modname.. "_mycelium.png"
-
 -- ================================================================== --
 for i = 1, 4 do
  local density = i*64
@@ -38,3 +37,4 @@ for i = 1, 4 do
 		sounds = nodecore.sounds("nc_terrain_chompy")
 	})
 end
+-- ================================================================== --

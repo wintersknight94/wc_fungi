@@ -13,7 +13,7 @@ local function mushroom_bricks(desc, capcolor, stalkcolor, suff, light)
  local hyphae = modname .. "_mushroom_cap.png^[colorize:" ..stalkcolor
  local fbrick = mycota.. "^[mask:" ..brckmask
  local name = desc:lower()
- 
+------------------------------------------------------------------------
 	minetest.register_node(modname .. ":bricks" ..suff, {
 		description = (desc.. " Bricks"),
 		tiles = {mycota.. "^(" ..brickgap.. ")"},
@@ -30,12 +30,14 @@ local function mushroom_bricks(desc, capcolor, stalkcolor, suff, light)
 		crush_damage = 1,
 		sounds = nodecore.sounds(shroom_sound)
 	})
-	minetest.register_node(":" .. modname .. ":bricks" ..suff.. "_bonded", {
+------------------------------------------------------------------------
+	minetest.register_node(modname .. ":bricks" ..suff.. "_bonded", {
 		description = "Bonded " .. desc .. " Bricks",
 		tiles = {"(" ..hyphae.. ")^(" ..fbrick.. ")"},
 		groups = {
 			choppy = 2,
 			shroom_bricks = 2,
+			shroom_bonded = 1,
 			lux_absorb = 48,
 			flammable = 38,
 			bouncy = 16,
@@ -44,8 +46,26 @@ local function mushroom_bricks(desc, capcolor, stalkcolor, suff, light)
 		light_source = light,
 		glow = light,
 		crush_damage = 1,
-		sounds = nodecore.sounds(shroom_sound),
+		drop_in_place = modname .. ":bricks" ..suff,
+		sounds = nodecore.sounds(shroom_sound),		
 	})
+------------------------------------------------------------------------
+	minetest.register_abm({
+		label = "Mushroom Brick Bonding",
+		nodenames = {modname .. ":bricks" ..suff},
+		neighbors = {"group:moist", "group:mycelium", "group:shroom_bonded"},
+		interval = 120,
+		chance = 20,
+		action = function(pos)
+			local light = nodecore.get_node_light(pos)
+			if (not light) or light >= 6 then
+--				minetest.chat_send_all("wrong light")
+				return
+			end
+			return nodecore.set_loud(pos, {name = modname .. ":bricks" ..suff.. "_bonded"})
+		end
+	})
+------------------------------------------------------------------------
 end
 -- ================================================================== --
 mushroom_bricks("Mushroom",		"#cb410b:180",	"#e3dac9:100",	"",			nil)

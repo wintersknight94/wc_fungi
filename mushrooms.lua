@@ -3,7 +3,7 @@ local minetest, nodecore
     = minetest, nodecore
 -- LUALOCALS > ---------------------------------------------------------
 local modname = minetest.get_current_modname()
-local shroom_sound = "nc_tree_woody"
+local shroom_sound = modname.. "_squishy"
 -- ================================================================== --
 local function register_shroom(suff, desc, caplight, stalklight, gillight, capcolor, stalkcolor, gillcolor)
   local shroom = "(" ..modname.. "_mask_cap.png^[colorize:" ..capcolor.. ")^(" ..modname.. "_mask_stalk.png^[colorize:" ..stalkcolor.. ")^(" ..modname.. "_mask_gills.png^[colorize:" ..gillcolor.. ")"
@@ -28,7 +28,7 @@ local function register_shroom(suff, desc, caplight, stalklight, gillight, capco
 				attached_node = 1,
 				mushroom_agaric = 1,
 			},
-			sounds = nodecore.sounds("nc_terrain_swishy"),
+			sounds = nodecore.sounds(shroom_sound),
 			selection_box = {
 				type = "fixed",
 				fixed = {-6/16, -0.5, -6/16, 6/16, 4/16, 6/16},
@@ -56,7 +56,7 @@ local function register_shroom(suff, desc, caplight, stalklight, gillight, capco
 			mushroom_tall = 1,
 
 		},
-		sounds = nodecore.sounds("nc_terrain_swishy"),
+		sounds = nodecore.sounds(shroom_sound),
 		on_dig = function(pos)
 			local yield = math.random(0,4)
 			minetest.set_node(pos, {name = "air"})
