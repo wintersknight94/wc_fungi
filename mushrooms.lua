@@ -78,8 +78,9 @@ local function register_shroom(suff, desc, caplight, stalklight, gillight, capco
 			sunlight_propagates = true,
 			paramtype = 'light',
 			paramtype2 = "wallmounted",
-			light_source = light_source,
+			light_source = stalklight,
 			walkable = false,
+			climbable = true,
 			groups = {
 				snappy = 1,
 				fungi = 2,
