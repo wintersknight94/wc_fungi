@@ -15,6 +15,8 @@ local function register_shroom(suff, desc, caplight, stalklight, gillight, capco
 --local form = stalkmat.. "^[mask:nc_api_storebox_frame.png"
 --local shelf = "(" ..capmat.. ")^(" ..form.. ")"
   local shelf = "((" ..capmat.. ")^(" ..hyphae.. "))^(" ..form.. ")"
+  local smask = modname.. "_mask_shelf_inv.png"
+  local shminv = capmat.. "^[mask:" ..smask
 	minetest.register_node(modname.. ":mushroom" ..suff, {
 			description = desc,
 			drawtype = 'plantlike',
@@ -75,6 +77,8 @@ local function register_shroom(suff, desc, caplight, stalklight, gillight, capco
 			description = desc,
 			drawtype = 'nodebox',
 			tiles = {modname .. "_mushroom_cap.png^[colorize:" ..capcolor},
+			inventory_image = shminv,
+			wield_image = shminv,
 			sunlight_propagates = true,
 			paramtype = 'light',
 			paramtype2 = "wallmounted",
