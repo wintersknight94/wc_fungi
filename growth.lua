@@ -1,10 +1,16 @@
 -- LUALOCALS < ---------------------------------------------------------
-local math, minetest, nodecore
-    = math, minetest, nodecore
+local math, minetest, nodecore, vector
+    = math, minetest, nodecore, vector
 local math_random
     = math.random
 -- LUALOCALS > ---------------------------------------------------------
 local modname = minetest.get_current_modname()
+local directions = {
+	{x=1, y=0, z=0},
+	{x=-1, y=0, z=0},
+	{x=0, y=0, z=1},
+	{x=0, y=0, z=-1}
+}
 -- ================================================================== --
 -- ================================================================== --
 -- Here is where we make small mushrooms grow into tall ones --
@@ -87,12 +93,38 @@ minetest.register_abm({
 	end
 })
 -- ================================================================== --
+nodecore.register_abm({
+	label = "Shelf Mushroom Growth",
+	nodenames = {"group:detritus"},
+	interval = 300, --300
+	chance = 20, --20
+	action = function(pos, node)
+	  local dir = directions[math.random(1,4)]
+	  local next_pos = vector.add(pos, dir)
+	  local next_node = minetest.get_node(next_pos)	
+		if next_node.name == "air" then
+		local light = nodecore.get_node_light(next_pos)
+--		if (not light) or light >= 8 then
+--			minetest.chat_send_all("wrong light")
+--			return
+--		end
+		if light >= 4 then
+			return nodecore.set_loud(next_pos, {name = modname .. ":mushroom_shelf", param2 = minetest.dir_to_wallmounted(vector.multiply(dir, -1))})
+		end
+		if #nodecore.find_nodes_around(pos, "group:lux_emit", 2) > 0 then
+			return nodecore.set_loud(next_pos, {name = modname .. ":mushroom_shelf_lux"})
+		end
+		return nodecore.set_loud(next_pos, {name = modname .. ":mushroom_shelf_glow"})
+		end
+	end
+})
+
 
 -- ================================================================== --
---[[local function giantgrowth(id)
+--[[
 	minetest.register_abm({
 		label = "Giant growth",
-		nodenames = {modname.. ":mushroom_tall" ..id},
+		nodenames = {modname.. ":mushroom_tall"},
 		neighbors = {modname.. ":mycelium_4"},
 		interval = 6,	--600
 		chance = 1,		--100
@@ -101,13 +133,10 @@ minetest.register_abm({
 			local above = {x = pos.x, y = pos.y + i, z = pos.z}
 			local anode = minetest.get_node(above)
 				if anode.name == "air" then
-					minetest.place_schematic(pos, {"nodecore.bigmushroom" ..id.. "_schematic"}, "place_center_x, place_center_z", "random")
+					minetest.place_schematic(pos, {"nodecore.bigmushroom_schematic"}, "place_center_x, place_center_z", "random")
 				end
 		  end		
 		end
 	})
-end
+
 -- ================================================================== --
-giantgrowth("",		)
-giantgrowth("_glow",	)
-giantgrowth("_lux",	)]]
