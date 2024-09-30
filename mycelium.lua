@@ -20,8 +20,7 @@ for i = 1, 4 do
 			crumbly = 1,
 			soil = i+3,
 			fungal = 1,
-			mycelium = i,
-			moist = 1		--this is only here so that is automatically boosts most plantlife, including modded
+			mycelium = i
 		},
 		alternate_loose = {
 			tiles = {"(" ..mycelium.. ")^nc_api_loose.png"},
@@ -46,8 +45,34 @@ for i = 1, 4 do
 		 local n = i+1
 			if n == 5 then return end
 			if #nodecore.find_nodes_around(pos, modname.. ":mycelium_" ..i, 1) >= 8 then
-				nodecore.set_loud(pos, {name = modname.. ":mycelium_" ..n})
+				minetest.set_node(pos, {name = modname.. ":mycelium_" ..n})
 			end
+		end
+	})
+	nodecore.register_aism({
+		label = "mycelium stack dying",
+		interval = 60,
+		chance = 10,
+		arealoaded = 2,
+		itemnames = {modname.. ":mycelium_" ..i},
+		action = function(stack, data)
+			if data.toteslot then return end
+			if i == 1 then return end
+			if data.player and data.list then
+				local inv = data.player:get_inventory()
+				for i = 1, inv:get_size(data.list) do
+					local item = inv:get_stack(data.list, i):get_name()
+					if minetest.get_item_group(item, "moist") > 0 then return end
+				end
+			end
+			if #nodecore.find_nodes_around(data.pos, "group:moist", 2) > 0 then return end
+			nodecore.sound_play("nc_terrain_chompy", {pos = data.pos})
+			local taken = stack:take_item(1)
+			local n = i-1
+			taken:set_name(modname.. ":mycelium_" ..n)
+			if data.inv then taken = data.inv:add_item("main", taken) end
+			if not taken:is_empty() then nodecore.item_eject(data.pos, taken) end
+			return stack
 		end
 	})
 end
@@ -70,14 +95,16 @@ end
 
 -- ================================================================== --
 nodecore.register_abm({
-	label = "Mycelium 1 Growth",
+	label = "Mycelium Growth",
 	nodenames = {"group:dirt", "group:mud"},
-	neighbors = {modname.. ":mycelium_1"},
+	neighbors = {"group:mycelium"},
 	neighbors_invert = true,
 	interval = 300,
 	chance = 100,
 	action = function(pos)
-		nodecore.set_loud(pos, {name = modname.. ":mycelium_1"})
+	  local above = {x = pos.x, y = pos.y + 1, z = pos.z}
+		if nodecore.is_full_sun(above) then return end
+		minetest.set_node(pos, {name = modname.. ":mycelium_1"})
 	end
 })
 

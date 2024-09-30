@@ -8,6 +8,8 @@ minetest.register_alias("wc_naturae:compost",						modname .. ":mycelium_1")
 minetest.register_alias("wc_naturae:mycelium_loose",				modname .. ":mycelium_2")
 minetest.register_alias("wc_naturae:mycelium",						modname .. ":mycelium_3")
 
+minetest.register_alias("wc_naturae:decayed_log",					modname .. ":decayed_log")
+
 minetest.register_alias("wc_naturae:mushroom",						modname .. ":mushroom")
 minetest.register_alias("wc_naturae:mushroom_glow",					modname .. ":mushroom_glow")
 minetest.register_alias("wc_naturae:mushroom_lux",					modname .. ":mushroom_lux")

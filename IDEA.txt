@@ -1,8 +1,6 @@
 
 mycelial connection system
 
-concrete/bricks - shroomcrete? mycrete? mycotadobe
-
 slime mold :optional:default=false	colony of nodes moving and consuming
 
 megaspores :optional:default=false	giant spores drifting through the air, dont touch! may grow something unexpected

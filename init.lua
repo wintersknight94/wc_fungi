@@ -9,6 +9,8 @@ include("mycelium")
 
 include("mushrooms")
 
+include("detritus")
+
 if minetest.settings:get_bool(modname .. ".mushroom_bricks", true) then
 	include("bricks")
 end
@@ -21,7 +23,7 @@ include("growth")
 
 --include("decor")
 
---include("decay")
+include("decay")
 
 --include("network")
 

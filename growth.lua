@@ -34,7 +34,6 @@ shroomgrowth("",		8)
 shroomgrowth("_glow",	6)
 shroomgrowth("_lux",	4)
 -- ================================================================== --
--- ================================================================== --
 
 ------------------------------------------------------------------------
 minetest.register_abm({
@@ -87,3 +86,28 @@ minetest.register_abm({
 		return nodecore.set_loud(above, {name = modname .. ":mushroom"})
 	end
 })
+-- ================================================================== --
+
+-- ================================================================== --
+--[[local function giantgrowth(id)
+	minetest.register_abm({
+		label = "Giant growth",
+		nodenames = {modname.. ":mushroom_tall" ..id},
+		neighbors = {modname.. ":mycelium_4"},
+		interval = 6,	--600
+		chance = 1,		--100
+		action = function(pos)
+		  for i = 1, 7 do
+			local above = {x = pos.x, y = pos.y + i, z = pos.z}
+			local anode = minetest.get_node(above)
+				if anode.name == "air" then
+					minetest.place_schematic(pos, {"nodecore.bigmushroom" ..id.. "_schematic"}, "place_center_x, place_center_z", "random")
+				end
+		  end		
+		end
+	})
+end
+-- ================================================================== --
+giantgrowth("",		)
+giantgrowth("_glow",	)
+giantgrowth("_lux",	)]]
