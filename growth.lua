@@ -118,25 +118,32 @@ nodecore.register_abm({
 		end
 	end
 })
-
-
 -- ================================================================== --
---[[
+local function growth_giantshroom(id, schem)
 	minetest.register_abm({
-		label = "Giant growth",
-		nodenames = {modname.. ":mushroom_tall"},
+		label = "Giant growth" ..id,
+		nodenames = {modname.. ":mushroom_tall" ..id},
 		neighbors = {modname.. ":mycelium_4"},
-		interval = 6,	--600
-		chance = 1,		--100
-		action = function(pos)
-		  for i = 1, 7 do
-			local above = {x = pos.x, y = pos.y + i, z = pos.z}
+		interval = 600,	--600
+		chance = 100,		--100
+		action = function(pos, node)
+--			minetest.chat_send_all("starting up")
+			local above = {x = pos.x, y = pos.y + 3, z = pos.z}
+			local below = {x = pos.x, y = pos.y - 1, z = pos.z}
 			local anode = minetest.get_node(above)
-				if anode.name == "air" then
-					minetest.place_schematic(pos, {"nodecore.bigmushroom_schematic"}, "place_center_x, place_center_z", "random")
-				end
-		  end		
+				if nodecore.is_full_sun(above) then return end
+				if nodecore.air_equivalent(anode) then
+--				minetest.chat_send_all("good air")
+					--minetest.place_schematic(pos, schematic, rotation, replacements, force_placement, flags)
+					minetest.place_schematic(below, schem, "random", {}, true, "place_center_x, place_center_z")
+--					minetest.chat_send_all("shroom grown")
+				else
+--				minetest.chat_send_all("failed")
+				end		
 		end
 	})
-]]
+end
+growth_giantshroom("",	nodecore.bigmushroom_schematic)
+growth_giantshroom("_glow",	nodecore.bigmushroom_glow_schematic)
+growth_giantshroom("_lux",	nodecore.bigmushroom_lux_schematic)
 -- ================================================================== --
