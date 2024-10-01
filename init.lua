@@ -17,9 +17,9 @@ end
 
 include("crafting")
 
-include("growth")
+include("schematics")
 
---include("schematics")
+include("growth")
 
 --include("decor")
 
