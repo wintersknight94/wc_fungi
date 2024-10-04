@@ -28,7 +28,7 @@ local function shroomgrowth(id, maxlight)
 		  local light = nodecore.get_node_light(above)
 			if light >= maxlight then return
 			end
-				if anode.name == "air" then
+				if nodecore.air_equivalent(anode) then
 					nodecore.set_loud(pos, {name = modname.. ":mushroom_tall" ..id})
 					nodecore.witness(pos, "tallshroom growth")
 				end
@@ -102,7 +102,7 @@ nodecore.register_abm({
 	  local dir = directions[math.random(1,4)]
 	  local next_pos = vector.add(pos, dir)
 	  local next_node = minetest.get_node(next_pos)	
-		if next_node.name == "air" then
+		if nodecore.air_equivalent(next_node) then
 		local light = nodecore.get_node_light(next_pos)
 --		if (not light) or light >= 8 then
 --			minetest.chat_send_all("wrong light")
