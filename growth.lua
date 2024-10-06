@@ -108,13 +108,16 @@ nodecore.register_abm({
 --			minetest.chat_send_all("wrong light")
 --			return
 --		end
+		local newshroom = { name = modname .. ":mushroom_shelf", param2 = minetest.dir_to_wallmounted(vector.multiply(dir, -1)) }
 		if light >= 4 then
-			return nodecore.set_loud(next_pos, {name = modname .. ":mushroom_shelf", param2 = minetest.dir_to_wallmounted(vector.multiply(dir, -1))})
+			return nodecore.set_loud(next_pos, newshroom)
 		end
 		if #nodecore.find_nodes_around(pos, "group:lux_emit", 2) > 0 then
-			return nodecore.set_loud(next_pos, {name = modname .. ":mushroom_shelf_lux"})
+			newshroom.name = newshroom.name .. "_lux"
+			return nodecore.set_loud(next_pos, newshroom)
 		end
-		return nodecore.set_loud(next_pos, {name = modname .. ":mushroom_shelf_glow"})
+		newshroom.name = newshroom.name .. "_glow"
+		return nodecore.set_loud(next_pos, newshroom)
 		end
 	end
 })
