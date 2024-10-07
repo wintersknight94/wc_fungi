@@ -39,7 +39,7 @@ for i = 1, 4 do
 		label = "Mycelium Establishment",
 		nodenames = {modname.. ":mycelium_" ..i},
 		neighbors = {modname.. ":mycelium_" ..i},
-		interval = 300,
+		interval = 1200,
 		chance = 100,
 		action = function(pos)
 		 local n = i+1
@@ -77,6 +77,20 @@ for i = 1, 4 do
 	})
 end
 -- ================================================================== --
+nodecore.register_abm({
+	label = "Mycelium Growth",
+	nodenames = {"group:dirt", "group:mud"},
+	neighbors = {"group:mycelium"},
+	neighbors_invert = true,
+	interval = 1200,
+	chance = 100,
+	action = function(pos)
+	  local above = {x = pos.x, y = pos.y + 1, z = pos.z}
+		if nodecore.is_full_sun(above) then return end
+		minetest.set_node(pos, {name = modname.. ":mycelium_1"})
+	end
+})
+-- ================================================================== --
 
 -- Ok, so lets think about this. mycelium should slowly spread, and should get a boost when it is near a rotting thing or tree,
 -- and trees and plants should get a boost from the mycelium, which should be automatically handled by the soil fertility api
@@ -92,19 +106,3 @@ end
 -- level 2 can spread in darkness without moisture, or in dim light with moisture
 -- level 3 can spread to rotting things in dim light 
 -- level 4 can spread to grass in the presence of stumps or rotting things
-
--- ================================================================== --
-nodecore.register_abm({
-	label = "Mycelium Growth",
-	nodenames = {"group:dirt", "group:mud"},
-	neighbors = {"group:mycelium"},
-	neighbors_invert = true,
-	interval = 300,
-	chance = 100,
-	action = function(pos)
-	  local above = {x = pos.x, y = pos.y + 1, z = pos.z}
-		if nodecore.is_full_sun(above) then return end
-		minetest.set_node(pos, {name = modname.. ":mycelium_1"})
-	end
-})
-
