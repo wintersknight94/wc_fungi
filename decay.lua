@@ -18,11 +18,11 @@ minetest.register_abm({
 
 minetest.register_abm({
 	label = "detritus overcome",
-	interval = 300,
-	chance = 40,
+	interval = 3600,
+	chance = 100,
 	nodenames = {"group:detritus"},
 	neighbors = {"group:mycelium","group:fungal"},
 	action = function(pos, node)
-		return minetest.set_node(pos, {name = modname .. ":mycelium_4"})
+		return minetest.set_node(pos, {name = modname .. ":mycelium_3"})
 	end
 })
