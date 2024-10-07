@@ -11,7 +11,7 @@ local function register_shroom(suff, desc, caplight, stalklight, gillight, capco
   local tallshroom =  "(" ..modname.. "_mask_tallcap.png^[colorize:" ..capcolor.. ")^(" ..modname.. "_mask_tallstalk.png^[colorize:" ..stalkcolor.. ")^(" ..modname.. "_mask_tallgills.png^[colorize:" ..gillcolor.. ")"
   local capmat = modname.. "_mushroom_cap.png^[colorize:" ..capcolor
   local stalkmat = modname.. "_mushroom_cap.png^[colorize:" ..stalkcolor
-  local hyphae = stalkmat.. "^[mask:nc_concrete_pattern_vermy.png" 
+  local hyphae = stalkmat.. "^[mask:nc_concrete_mask.png" 
 --local form = stalkmat.. "^[mask:nc_api_storebox_frame.png"
 --local shelf = "(" ..capmat.. ")^(" ..form.. ")"
   local shelf = "((" ..capmat.. ")^(" ..hyphae.. "))^(" ..form.. ")"
@@ -66,6 +66,10 @@ local function register_shroom(suff, desc, caplight, stalklight, gillight, capco
 
 		},
 		sounds = nodecore.sounds(shroom_sound),
+		selection_box = {
+			type = "fixed",
+			fixed = {-0.3125, -0.5, -0.3125, 0.3125, 1, 0.3125}
+		},
 		on_dig = function(pos)
 			local yield = math.random(0,4)
 			minetest.set_node(pos, {name = "air"})
@@ -89,6 +93,7 @@ local function register_shroom(suff, desc, caplight, stalklight, gillight, capco
 				snappy = 1,
 				fungi = 2,
 				flammable = 1,
+				basketable = 1,
 				attached_node = 1,
 				mushroom_shelf = 1,
 			},
@@ -119,8 +124,8 @@ local function register_shroom(suff, desc, caplight, stalklight, gillight, capco
 			flammable = 2,
 			fire_fuel = 4,
 			mushblock = 1,
-			bouncy = 20,
-			fall_damage_add_percent = -20,
+			bouncy = 24,
+			fall_damage_add_percent = -24,
 		},
 		sounds = nodecore.sounds(shroom_sound),
 		light_source = caplight
@@ -134,12 +139,12 @@ local function register_shroom(suff, desc, caplight, stalklight, gillight, capco
 			modname .. "_mushroom_stem.png^[colorize:" ..stalkcolor
 		},
 		groups = {
-			choppy = 1,
+			choppy = 2,
 			flammable = 2,
 			fire_fuel = 4,
 			mushblock = 1,
-			bouncy = 10,
-			fall_damage_add_percent = -10,
+			bouncy = 16,
+			fall_damage_add_percent = -16,
 		},
 		paramtype2 = "facedir",
 		on_place = minetest.rotate_node,
@@ -157,7 +162,7 @@ local function register_shroom(suff, desc, caplight, stalklight, gillight, capco
 		groups = {
 			snappy = 1,
 			flammable = 2,
-			fire_fuel = 4,
+			fire_fuel = 1,
 			attached_node = 1,
 			mushgills = 1
 		},
@@ -216,6 +221,7 @@ end
 register_shroom("", 			"Mushroom",		nil,	nil,	nil,	"#cb410b:180",	"#e3dac9:100",	"WHITE:100")
 register_shroom("_glow",		"Glowshroom",	2,		2,		3,		"#0892d0:120",	"WHITE:140",	"#f0f8ff:100")	
 register_shroom("_lux",			"Luxaeterna",	1,		4,		5,		"#664c28:180",	"#009e60:140",	"#b2ec5d:100")
+register_shroom("_honey",		"Honeycap",		1,		nil,	nil,	"#daa520:180",	"#faebd7:100",	"#fafad2:180")
 ---------------------------------------------------------------------------------------------------------------------------
 if minetest.settings:get_bool(modname .. ".extrashrooms", true) then
 	register_shroom("_gloom",	"Gloomshroom",		1,		1,		6,		"#2f4f4f:160",	"#4682b4:160",	"#b2ec5d:160")
@@ -225,7 +231,6 @@ if minetest.settings:get_bool(modname .. ".extrashrooms", true) then
 	register_shroom("_star",	"Astralcap",		3,		1,		2,		"#5f9ea0:180",	"#009e60:140",	"#9932cc:100")
 	register_shroom("_wart",	"Mushwort",			nil,	nil,	nil,	"#664c28:180",	"#008080:140",	"#cb410b:180")
 	register_shroom("_stone",	"Stonecap",			nil,	nil,	nil,	"#2f4f4f:180",	"#5f9ea0:100",	"#cb410b:180")
-	register_shroom("_honey",	"Honeycap",			1,		nil,	nil,	"#daa520:180",	"#faebd7:100",	"#fafad2:180")
 end
 ---------------------------------------------------------------------------------------------------------------------------
 --lodespindle
