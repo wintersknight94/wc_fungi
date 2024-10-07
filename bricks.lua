@@ -18,12 +18,12 @@ local function mushroom_bricks(desc, capcolor, stalkcolor, suff, light)
 		description = (desc.. " Bricks"),
 		tiles = {mycota.. "^(" ..brickgap.. ")"},
 		groups = {
-			choppy = 1,
+			choppy = 2,
 			shroom_bricks = 1,
 			lux_absorb = 42,
 			flammable = 32,
-			bouncy = 15,
-			fall_damage_add_percent = -15
+			bouncy = 32,
+			fall_damage_add_percent = -32
 		},
 --		light_source = light,
 		glow = light,
@@ -35,13 +35,13 @@ local function mushroom_bricks(desc, capcolor, stalkcolor, suff, light)
 		description = "Bonded " .. desc .. " Bricks",
 		tiles = {"(" ..hyphae.. ")^(" ..fbrick.. ")"},
 		groups = {
-			choppy = 2,
+			choppy = 3,
 			shroom_bricks = 2,
 			shroom_bonded = 1,
 			lux_absorb = 48,
 			flammable = 38,
-			bouncy = 16,
-			fall_damage_add_percent = -16
+			bouncy = 24,
+			fall_damage_add_percent = -24
 		},
 		light_source = light,
 		glow = light,
@@ -66,9 +66,33 @@ local function mushroom_bricks(desc, capcolor, stalkcolor, suff, light)
 		end
 	})
 ------------------------------------------------------------------------
+	nodecore.register_craft({
+		label = "Chisel " ..desc.. " Bricks",
+		action = "pummel",
+		duration = 2,
+		toolgroups = {thumpy = 2},
+		normal = {y = 1},
+		indexkeys = {"group:chisel"},
+		nodes = {
+			{
+			match = {
+				lode_temper_cool = true,
+				groups = {chisel = true}
+				},
+			dig = true
+			},
+			{
+				y = -1,
+				match = modname .. ":mushroom_cap" ..suff,
+				replace = modname .. ":bricks" ..suff
+			}
+		}
+	})
+------------------------------------------------------------------------
 end
 -- ================================================================== --
 mushroom_bricks("Mushroom",		"#cb410b:180",	"#e3dac9:100",	"",			nil)
+mushroom_bricks("Honeycap",		"#daa520:180",	"#faebd7:100",	"_honey",	nil)
 mushroom_bricks("Glowshroom",	"#0892d0:120",	"WHITE:140",	"_glow",	1)	
 mushroom_bricks("Luxaeterna",	"#664c28:180",	"#009e60:140",	"_lux",		1)
 
