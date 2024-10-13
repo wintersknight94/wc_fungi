@@ -25,6 +25,8 @@ include("growth")
 
 include("decay")
 
+include("shroomfall")
+
 --include("network")
 
 --include("myconids")

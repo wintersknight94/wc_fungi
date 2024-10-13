@@ -126,9 +126,14 @@ local function register_shroom(suff, desc, caplight, stalklight, gillight, capco
 			mushblock = 1,
 			bouncy = 24,
 			fall_damage_add_percent = -24,
+			shroom_decay = 1,
+			shroom_decay_transmit = 1
 		},
 		sounds = nodecore.sounds(shroom_sound),
-		light_source = caplight
+		light_source = caplight,
+		after_dig_node = function(...)
+			return nodecore.shroom_decay(...)
+		end,
 	})
 ------------------------------------------------------------------------
 	minetest.register_node(modname.. ":mushroom_stalk" ..suff, {
@@ -145,6 +150,8 @@ local function register_shroom(suff, desc, caplight, stalklight, gillight, capco
 			mushblock = 1,
 			bouncy = 16,
 			fall_damage_add_percent = -16,
+			shroom_decay_support = 1,
+			falling_node = 1,
 		},
 		paramtype2 = "facedir",
 		on_place = minetest.rotate_node,
@@ -164,7 +171,9 @@ local function register_shroom(suff, desc, caplight, stalklight, gillight, capco
 			flammable = 2,
 			fire_fuel = 1,
 			attached_node = 1,
-			mushgills = 1
+			mushgills = 1,
+			shroom_decay = 1,
+			shroom_decay_transmit = 1
 		},
 		waving = 1,
 		walkable = false,
@@ -235,3 +244,4 @@ end
 ---------------------------------------------------------------------------------------------------------------------------
 --lodespindle
 --pumcradle
+
