@@ -35,16 +35,17 @@ for i = 1, 4 do
 		},
 		sounds = nodecore.sounds("nc_terrain_chompy")
 	})
+------------------------------------------------------------------------
 	nodecore.register_abm({
 		label = "Mycelium Establishment",
 		nodenames = {modname.. ":mycelium_" ..i},
 		neighbors = {modname.. ":mycelium_" ..i},
-		interval = 1200,
+		interval = 1200, --approx.20min
 		chance = 100,
 		action = function(pos)
 		 local n = i+1
 			if n == 5 then return end
-			if #nodecore.find_nodes_around(pos, modname.. ":mycelium_" ..i, 1) >= 8 then
+			if #nodecore.find_nodes_around(pos, modname.. ":mycelium_" ..i, 1) >= 12 then
 				minetest.set_node(pos, {name = modname.. ":mycelium_" ..n})
 			end
 		end
