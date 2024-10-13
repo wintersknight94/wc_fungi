@@ -37,6 +37,7 @@ local function shroomgrowth(id, maxlight)
 end
 -- ================================================================== --
 shroomgrowth("",		8)
+shroomgrowth("_honey",	8)
 shroomgrowth("_glow",	6)
 shroomgrowth("_lux",	4)
 -- ================================================================== --
@@ -46,8 +47,8 @@ minetest.register_abm({
 	label = "Shroom Growth",
 --	nodenames = {groups = {fungal = true}},
 	nodenames = {"group:mycelium"},
-	interval = 600,
-	chance = 20,
+	interval = 1800, --approx.30min
+	chance = 64,
 	action = function(pos)
 		local above = {x = pos.x, y = pos.y + 1, z = pos.z}
 		if not nodecore.buildable_to(above) then
@@ -57,7 +58,7 @@ minetest.register_abm({
 		if (not light) or light >= 8 then
 			return
 		end
-		if light >= 4 then
+		if light >= 5 then
 			return nodecore.set_loud(above, {name = modname .. ":mushroom", param2 = 10})
 		end
 		if #nodecore.find_nodes_around(pos, "group:lux_emit", 2) > 0 then
@@ -72,7 +73,7 @@ minetest.register_abm({
 	label = "Mushroom Growth",
 	nodenames = {"nc_tree:humus"},
 	neighbors = {"group:moist"},
-	interval = 900,
+	interval = 1800, --approx.30min
 	chance = 100,
 	action = function(pos)
 		local above = {x = pos.x, y = pos.y + 1, z = pos.z}
@@ -121,7 +122,7 @@ local function growth_giantshroom(id, schem)
 		label = "Giant growth" ..id,
 		nodenames = {modname.. ":mushroom_tall" ..id},
 		neighbors = {modname.. ":mycelium_4"},
-		interval = 600,	--600
+		interval = 600,		--approx.10min
 		chance = 100,		--100
 		action = function(pos, node)
 --			minetest.chat_send_all("starting up")
@@ -140,7 +141,8 @@ local function growth_giantshroom(id, schem)
 		end
 	})
 end
-growth_giantshroom("",	nodecore.bigmushroom_schematic)
-growth_giantshroom("_glow",	nodecore.bigmushroom_glow_schematic)
-growth_giantshroom("_lux",	nodecore.bigmushroom_lux_schematic)
+growth_giantshroom("",			nodecore.bigmushroom_schematic)
+growth_giantshroom("_glow",		nodecore.bigmushroom_glow_schematic)
+growth_giantshroom("_lux",		nodecore.bigmushroom_lux_schematic)
+growth_giantshroom("_honey",	nodecore.bigmushroom_honey_schematic)
 -- ================================================================== --
