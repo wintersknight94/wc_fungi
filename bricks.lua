@@ -23,7 +23,8 @@ local function mushroom_bricks(desc, capcolor, stalkcolor, suff, light)
 			lux_absorb = 42,
 			flammable = 32,
 			bouncy = 32,
-			fall_damage_add_percent = -32
+			fall_damage_add_percent = -32,
+			falling_repose = 2,
 		},
 --		light_source = light,
 		glow = light,
