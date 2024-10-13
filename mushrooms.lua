@@ -240,6 +240,7 @@ if minetest.settings:get_bool(modname .. ".extrashrooms", true) then
 	register_shroom("_star",	"Astralcap",		3,		1,		2,		"#5f9ea0:180",	"#009e60:140",	"#9932cc:100")
 	register_shroom("_wart",	"Mushwort",			nil,	nil,	nil,	"#664c28:180",	"#008080:140",	"#cb410b:180")
 	register_shroom("_stone",	"Stonecap",			nil,	nil,	nil,	"#2f4f4f:180",	"#5f9ea0:100",	"#cb410b:180")
+	register_shroom("_ghost",	"Ghostcap",			nil,	nil,	nil,	"#f8f8ff:140",	"#fffff0:100",	"#f8f8ff:180")
 end
 ---------------------------------------------------------------------------------------------------------------------------
 --lodespindle
